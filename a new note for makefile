@@ -1,0 +1,32 @@
+new note:
+
+# Makefile
+
+# Variables
+CC = gcc
+CFLAGS = -g -Wall
+
+# Targets
+assemble: assembler2.c
+        $(CC) -c assembler2.c
+        $(CC) -o assembler assembler2.o
+        ./assembler $(FILENAME)
+
+simulate:
+        $(CC) simulator.c $(CFLAGS) -o output_exe
+        ./output_exe
+
+all: assemble simulate
+
+clean:
+        rm -f *.o assembler output_exe
+
+help:
+        @echo "Type 'make assemble FILENAME=fibb.asm' to compile and run the Assembler."
+        @echo "Type 'make simulate' to run the Simulator."
+        @echo "Type 'make all' to compile both programs."
+        @echo "Type 'make clean' to remove any compiled files."
+
+
+.PHONY: assemble simulate all clean help
+
